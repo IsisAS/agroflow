@@ -5,6 +5,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-merriweather: 'Merriweather', serif;
+  --border-color: #D9D9D9;
+  --text-color: #333333;
+  --primary-color: #287F71;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +20,5 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-merriweather);
 }
