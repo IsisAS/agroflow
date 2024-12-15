@@ -1,7 +1,7 @@
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions: AuthOptions = {
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -16,16 +16,14 @@ export const authOptions: AuthOptions = {
         ) {
           return { id: "1", name: "Admin", email: "admin@agroflow.com" };
         }
-
         return null;
       },
     }),
   ],
-  secret: "6BChSrlwxa8izqF0ZUVzccymek0OaU1okVP65q380BDdoeOOctyMdOg5s1eoWVuk",
+  secret: process.env.NEXTAUTH_SECRET || "6BChSrlwxa8izqF0ZUVzccymek0OaU1okVP65q380BDdoeOOctyMdOg5s1eoWVuk",
   callbacks: {
-    async session({ session, token }) {
+    async session({ session }) {
       if (session.user) {
-        session.user.id = token.id as string;
       }
       return session;
     },
@@ -36,8 +34,6 @@ export const authOptions: AuthOptions = {
       return token;
     },
   },
-};
-
-const handler = NextAuth(authOptions);
+});
 
 export { handler as GET, handler as POST };

@@ -7,5 +7,5 @@ export default function App() {
   
   useEffect(() => {
     router.push('/auth');
-  }, []);
+  }, [router]);
 }

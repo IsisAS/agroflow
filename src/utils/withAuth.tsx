@@ -1,9 +1,9 @@
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-export const withAuth = (Component: React.ComponentType) => {
-  return function ProtectedComponent(props: any) {
+export const withAuth = <P extends object>(Component: React.ComponentType<P>) => {
+  return function ProtectedComponent(props: P) {
     const { data: session, status } = useSession();
     const router = useRouter();
 
@@ -17,6 +17,6 @@ export const withAuth = (Component: React.ComponentType) => {
       return <p>Carregando...</p>;
     }
 
-    return <>{session ? <Component {...props} /> : null}</>;
+    return session ? <Component {...props} /> : null;
   };
 };
