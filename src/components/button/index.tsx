@@ -2,7 +2,7 @@
 type ButtonProps = {
     size: "small" | "medium" | "large";
     label: string;
-    onClick: () => void;
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
     backgroundColor: "primary" | "secondary" | "danger";
 }
 export default function Button(props: ButtonProps) {
@@ -21,7 +21,8 @@ export default function Button(props: ButtonProps) {
     return (
         <button
             className={`${sizeClass[props.size]} ${colorClass[props.backgroundColor]} py-2 px-4 rounded-md text-white`}
-            onClick={props.onClick}
+            onClick={(e) => props.onClick(e)}
+            type="submit"
         >
             {props.label}
         </button>

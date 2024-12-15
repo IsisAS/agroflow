@@ -1,9 +1,11 @@
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation"; 
 import { useState } from "react";
 
 export function useAuth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -12,10 +14,11 @@ export function useAuth() {
       email,
       password,
     });
+
     if (result?.error) {
       alert("Erro: " + result.error);
     } else {
-      alert("Login realizado com sucesso!");
+      router.push("/dashboard");
     }
   };
 

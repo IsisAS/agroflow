@@ -1,18 +1,7 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
-    };
-  }
-}
-
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -23,15 +12,16 @@ const handler = NextAuth({
       async authorize(credentials) {
         if (
           credentials?.email === "admin@agroflow.com" &&
-          credentials?.password === "123456"
+          credentials?.password === "123"
         ) {
           return { id: "1", name: "Admin", email: "admin@agroflow.com" };
         }
+
         return null;
       },
     }),
   ],
-  secret: "SECRET_KEY",
+  secret: "6BChSrlwxa8izqF0ZUVzccymek0OaU1okVP65q380BDdoeOOctyMdOg5s1eoWVuk",
   callbacks: {
     async session({ session, token }) {
       if (session.user) {
@@ -46,6 +36,8 @@ const handler = NextAuth({
       return token;
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

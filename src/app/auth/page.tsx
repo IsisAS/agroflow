@@ -52,7 +52,7 @@ export default function LoginPage() {
                         />
                     </div>
                     <Button
-                        onClick={() => handleSubmit}
+                        onClick={(e) => handleSubmit(e)}
                         backgroundColor="primary"
                         label="Entrar"
                         size="large"
