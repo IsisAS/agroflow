@@ -15,6 +15,7 @@ export default {
       backgroundImage:{
         bannerImage: "url('/background.png')",
         logo: "url('/logo.png')",
+        darkLogo: "url('/logo-escura.png')",
       }
     },
   },
