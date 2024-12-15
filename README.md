@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌾 AgroFlow - Sistema de Gerenciamento Agrícola
 
-## Getting Started
+Este projeto é uma aplicação full-stack desenvolvida com **Next.js**. Seu objetivo é oferecer uma solução eficiente para o **gerenciamento de recursos agrícolas**, facilitando a visualização e manipulação de dados em uma interface intuitiva e moderna.
 
-First, run the development server:
+## 🚀 Objetivo do Projeto
+
+O AgroFlow foi projetado para:  
+- Implementar um sistema seguro de **autenticação de usuários** com NextAuth.  
+- Fornecer um **dashboard dinâmico** com informações relevantes e organizadas.  
+- Implementar funcionalidades **CRUD** (Create, Read, Update, Delete) para gerenciamento de dados.  
+- Garantir **responsividade** e adaptação para diferentes dispositivos.  
+- Utilizar **rotas de API** integradas no Next.js para simular operações de backend.  
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Next.js**: Framework React para renderização híbrida (SSR e SSG).  
+- **NextAuth**: Sistema de autenticação.  
+- **TypeScript**: Tipagem estática para maior segurança e legibilidade do código.  
+- **Tailwind CSS**: Estilização eficiente e responsiva.  
+- **Vercel**: Plataforma para deploy otimizado e escalável.
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+│-- app/
+│   ├── api/             # Rotas de API do Next.js
+│   │   └── auth/        # Endpoints de autenticação
+│   │       └── [...nextauth]/route.ts
+│   ├── dashboard/       # Área logada e dashboards
+│   │   ├── layout.tsx   # Layout persistente para dashboard
+│   │   └── page.tsx     # Página inicial do dashboard
+│   ├── auth/            # Tela de login
+│   └── page.tsx         # Página inicial (rota pública)
+│
+│-- components/          # Componentes reutilizáveis (ex: Input, Button)
+│-- utils/               # Funções auxiliares (ex: withAuth)
+│-- styles/              # Estilos globais
+│-- public/              # Assets estáticos
+│
+└── README.md            # Documentação
