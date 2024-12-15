@@ -1,6 +1,6 @@
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 export function useAuth() {
   const [email, setEmail] = useState("");
@@ -24,3 +24,5 @@ export function useAuth() {
 
   return { email, setEmail, password, setPassword, handleSubmit };
 }
+
+
