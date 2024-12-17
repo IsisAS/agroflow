@@ -6,6 +6,9 @@ import gadoIcon from "./gado.png";
 import celeiroCinzaIcon from "./celeiro-cinza.png";
 import gadoCinzaIcon from "./gado-cinza.png";
 import layoutCinzaIcon from "./layout-cinza.png";
+import trashIcon from "./trash.png";
+import plusIcon from "./plus.png";
+import editIcon from "./edit.png";
 
 export const iconsList = {
   show: showIcon,
@@ -16,4 +19,7 @@ export const iconsList = {
   layout: layoutIcon,
   gado: gadoIcon,
   layoutCinza: layoutCinzaIcon,
+  trash: trashIcon,
+  plus: plusIcon,
+  edit: editIcon,
 };

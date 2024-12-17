@@ -7,7 +7,7 @@ import Button from "@/components/button";
 
 
 export default function LoginPage() {
-    const { handleSubmit, setEmail, setPassword, email, password } = useAuth()
+    const { handleSubmit, setEmail, setPassword, email, password, loading } = useAuth()
 
     return (
         <div className="flex h-screen">
@@ -56,6 +56,7 @@ export default function LoginPage() {
                         backgroundColor="primary"
                         label="Entrar"
                         size="large"
+                        isLoading={loading}
                     />
                 </form>
             </div>

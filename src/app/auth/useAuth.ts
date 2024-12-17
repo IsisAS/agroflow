@@ -6,9 +6,11 @@ export function useAuth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     const result = await signIn("credentials", {
       redirect: false,
       email,
@@ -18,11 +20,10 @@ export function useAuth() {
     if (result?.error) {
       alert("Erro: " + result.error);
     } else {
+      setLoading(false);
       router.push("/dashboard");
     }
   };
 
-  return { email, setEmail, password, setPassword, handleSubmit };
+  return { email, setEmail, password, setPassword, handleSubmit, loading };
 }
-
-
