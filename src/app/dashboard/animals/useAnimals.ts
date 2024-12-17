@@ -8,7 +8,18 @@ export default function useAnimals() {
     "Status",
   ];
 
-  const handleSubmit = async (formData: any) => {
+  type FormData = {
+    identification: string;
+    species: string;
+    breed: string;
+    gender: string;
+    age: number;
+    weight: number;
+    specifically: string;
+    location: string;
+  }
+
+  const handleSubmit = async (formData: FormData) => {
     try {
       const response = await fetch("/api/animals", {
         method: "POST",

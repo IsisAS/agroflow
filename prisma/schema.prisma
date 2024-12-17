@@ -14,16 +14,14 @@ datasource db {
 }
 
 model Animal {
-  id            Int      @id @default(autoincrement())
-  identificacao String
-  especie       String
-  raca          String
-  sexo          String
-  idade         Int
-  peso          Float
-  finalidade    String
-  localizacao   String
-  responsavel   String
-  observacoes   String? // Campo opcional
-  createdAt     DateTime @default(now())
+  id             Int      @id @default(autoincrement())
+  identification String
+  species        String
+  breed          String
+  gender         String
+  age            Int
+  weight         Float
+  specifically   String
+  location       String
+  createdAt      DateTime @default(now())
 }

@@ -8,28 +8,25 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const {
-      identificacao,
-      especie,
-      raca,
-      sexo,
-      idade,
-      peso,
-      finalidade,
-      localizacao,
-      responsavel,
-      observacoes,
+      identification,
+      species,
+      breed,
+      gender,
+      age,
+      weight,
+      specifically,
+      location,
     } = body;
 
     if (
-      !identificacao ||
-      !especie ||
-      !raca ||
-      !sexo ||
-      idade === undefined ||
-      peso === undefined ||
-      !finalidade ||
-      !localizacao ||
-      !responsavel
+      !identification ||
+      !species ||
+      !breed ||
+      !gender ||
+      age === undefined ||
+      weight === undefined ||
+      !specifically ||
+      !location
     ) {
       return NextResponse.json(
         { message: "Todos os campos obrigatórios devem ser preenchidos." },
@@ -39,16 +36,14 @@ export async function POST(req: Request) {
 
     const newAnimal = await prisma.animal.create({
       data: {
-        identificacao,
-        especie,
-        raca,
-        sexo,
-        idade: Number(idade),
-        peso: Number(peso),
-        finalidade,
-        localizacao,
-        responsavel,
-        observacoes,
+        identification,
+        species,
+        breed,
+        gender,
+        age: Number(age),
+        weight: Number(weight),
+        specifically,
+        location,
       },
     });
 
