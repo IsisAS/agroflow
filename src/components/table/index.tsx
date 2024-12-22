@@ -4,7 +4,7 @@ import Button from "../button";
 
 type TableProps = {
   header?: string[];
-  data?: { [key: string]: any }[];
+  data?: { [key: string]: unknown }[];
 };
 
 export default function Table({ header = [], data = [] }: TableProps) {
@@ -43,7 +43,7 @@ export default function Table({ header = [], data = [] }: TableProps) {
               >
                 {header.map((key, colIndex) => (
                   <td key={colIndex} className="text-left px-4 py-2">
-                    {row[key] || "--"}
+                    {String(row[key]) || "--"}
                   </td>
                 ))}
                 <td className="text-left px-4 py-2 flex gap-4">
