@@ -1,16 +1,18 @@
+"use client"
 import Table from "@/components/table";
 import useAnimals from "./useAnimals";
-
+import Breadcrumb from "@/components/breadcrumb";
 export default function Animals() {
-    const { header } = useAnimals();
+    const { header, router, breadcrumb } = useAnimals();
 
     return (
-        <div className="w-full flex flex-col gap-[100px]">
+        <div className="w-full flex flex-col gap-[20px]">
             <div>
                 <p className="text-[--text-color] text-[20px] font-bold">Gestão Inteligente dos Animais</p>
                 <p className="text-[--light-gray] font-semibold">Monitore, registre e cuide da saúde e produtividade do seu rebanho com precisão.</p>
             </div>
-            <Table header={header} />
+            <Breadcrumb items={breadcrumb} />
+            <Table header={header} onClick={() => router.push('/dashboard/animals/register')} />
         </div>
     )
 }

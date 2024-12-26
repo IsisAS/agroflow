@@ -5,10 +5,10 @@ type InputProps = {
     placeholder: string;
     label: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    value: string;
-    size: "small" | "medium" | "large";
+    value: string | undefined;
+    size: "small" | "medium" | "large" | "extraLarge";
     enableLabel: boolean;
-    inputType: "text" | "password";
+    inputType: "text" | "password" | "select";
     showPassword?: boolean;
 }
 
@@ -17,8 +17,9 @@ export default function Input(props: InputProps) {
 
     const sizeClass = {
         small: "w-[100px]",
-        medium: "w-[160px]",
-        large: "w-[80%]"
+        medium: "w-[200px]",
+        large: "w-[80%]",
+        extraLarge: "w-full"
     }
 
     const togglePasswordVisibility = () => {

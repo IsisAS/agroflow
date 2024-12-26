@@ -7,16 +7,8 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const {
-      identification,
-      species,
-      breed,
-      gender,
-      age,
-      weight,
-      specifically,
-      location,
-    } = body;
+    const { identification, species, breed, gender, age, weight, location } =
+      body;
 
     if (
       !identification ||
@@ -25,7 +17,6 @@ export async function POST(req: Request) {
       !gender ||
       age === undefined ||
       weight === undefined ||
-      !specifically ||
       !location
     ) {
       return NextResponse.json(
@@ -40,9 +31,8 @@ export async function POST(req: Request) {
         species,
         breed,
         gender,
-        age: Number(age),
-        weight: Number(weight),
-        specifically,
+        age,
+        weight,
         location,
       },
     });

@@ -5,9 +5,10 @@ import Button from "../button";
 type TableProps = {
   header?: string[];
   data?: { [key: string]: unknown }[];
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export default function Table({ header = [], data = [] }: TableProps) {
+export default function Table({ header = [], data = [], onClick }: TableProps) {
   return (
     <div className="w-full border border-[#E0E0E0] rounded-[10px] overflow-hidden p-[20px]">
       <div className="flex justify-end mb-4">
@@ -15,7 +16,7 @@ export default function Table({ header = [], data = [] }: TableProps) {
           label="Cadastrar"
           backgroundColor="primary"
           size="small"
-          onClick={() => console.log("Cadastrar clicado")}
+          onClick={onClick}
         />
       </div>
 

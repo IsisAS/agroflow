@@ -6,7 +6,7 @@ export default {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(spinner|table|checkbox|form|spacer).js"
+    "./node_modules/@nextui-org/theme/dist/components/(breadcrumbs|select|spinner|table|form|listbox|divider|popover|button|ripple|scroll-shadow|checkbox|spacer).js"
   ],
   theme: {
     extend: {

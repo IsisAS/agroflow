@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     return (
         <div className="flex">
             <aside className="w-[250px] text-white h-screen border-r-2 border-solid flex flex-col items-center pt-[30px] gap-[40px]">
-                <Image src="/logo-escura.png" alt="logo" width={150} height={150} />
+                <Image src="/logo-escura.png" alt="logo" width={150} height={150} style={{ width: "auto", height: "auto" }} />
 
                 <div>
                     {menu.map((item, index) => (
@@ -43,7 +43,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                                 onClick={() => navigateMenu(item)}
                                 className={`${selectedMenu === item.name ? 'bg-[--primary-color]' : 'bg-transparent'} flex items-center justify-start gap-[10px] rounded-[10px] h-[35px] w-[150px] pl-[20px] cursor-pointer`}>
                                 <Icon params={{ slug: selectedMenu === item.name ? item.icon : item.darkIcon, width: 22, height: 22 }} />
-                                <p className={`${selectedMenu === item.name ? 'text-[--text-white]' :  'text-[--text-color]'}`}>{item.name}</p>
+                                <p className={`${selectedMenu === item.name ? 'text-[--text-white]' : 'text-[--text-color]'}`}>{item.name}</p>
                             </div>
                         </div>
                     ))}
