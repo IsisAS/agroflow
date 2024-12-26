@@ -8,9 +8,10 @@ type TableProps = {
   dataMapping: { [key: string]: string }
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   editAction?: (id: unknown) => void;
+  excludeAction?: (id: unknown) => void;
 };
 
-export default function Table({ header = [], data = [], onClick, dataMapping, editAction }: TableProps) {
+export default function Table({ header = [], data = [], onClick, dataMapping, editAction, excludeAction }: TableProps) {
 
   return (
     <div className="w-full border border-[#E0E0E0] rounded-[10px] overflow-hidden p-[20px]">
@@ -51,12 +52,12 @@ export default function Table({ header = [], data = [], onClick, dataMapping, ed
                   </td>
                 ))}
                 <td className="text-left px-4 py-2 flex gap-4">
-                  <button title="Excluir">
+                  <button title="Excluir" onClick={() => excludeAction && excludeAction(row.id)}>
                     <Icon params={{ slug: "trash", width: 20, height: 20 }} />
                   </button>
-                  <button title="Editar"   onClick={() =>
-                      editAction && editAction(row.id)
-                    }>
+                  <button title="Editar" onClick={() =>
+                    editAction && editAction(row.id)
+                  }>
                     <Icon params={{ slug: "edit", width: 20, height: 20 }} />
                   </button>
                 </td>

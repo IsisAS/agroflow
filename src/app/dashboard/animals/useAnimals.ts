@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import { toast } from "react-toastify";
 export default function useAnimals() {
   const [animals, setAnimals] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -53,5 +53,30 @@ export default function useAnimals() {
     setAnimals(data.data);
   };
 
-  return { header, router, breadcrumb, animals, loading, dataMapping };
+  const removeAnimals = async (id: string) => {
+    setLoading(true);
+    await fetch(`/api/animals/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Não foi possivel remover o animal");
+      })
+      .finally(() => {
+        setLoading(false);
+        getAnimals();
+      });
+  };
+  return {
+    header,
+    router,
+    breadcrumb,
+    animals,
+    loading,
+    dataMapping,
+    removeAnimals,
+  };
 }
