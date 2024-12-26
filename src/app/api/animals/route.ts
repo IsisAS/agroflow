@@ -49,3 +49,17 @@ export async function POST(req: Request) {
     );
   }
 }
+
+export async function GET() {
+  try {
+    const data = await prisma.animal.findMany();
+
+    return NextResponse.json({ data });
+  } catch (error) {
+    console.error("Erro ao buscar animais:", error);
+    return NextResponse.json(
+      { message: "Erro interno do servidor." },
+      { status: 500 }
+    );
+  }
+}

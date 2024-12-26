@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
 export default function useRegister() {
   const breadcrumb = [
     { route: "/dashboard", name: "Dashboard" },
@@ -56,19 +58,18 @@ export default function useRegister() {
         },
         body: JSON.stringify(formData),
       });
-      debugger;
       const data = await response.json();
 
       if (response.ok) {
-        alert("Animal cadastrado com sucesso!");
+        toast.success("Animal cadastrado com sucesso!");
         router.push("/dashboard/animals");
       } else {
         console.error("Erro:", data.message);
-        alert(`Erro: ${data.message}`);
+        toast.error(`Erro: ${data.message}`);
       }
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
-      alert("Erro ao enviar dados.");
+      toast.error("Erro ao enviar dados.");
     } finally {
       setIsLoading(false);
     }

@@ -5,10 +5,12 @@ import Button from "../button";
 type TableProps = {
   header?: string[];
   data?: { [key: string]: unknown }[];
+  dataMapping: { [key: string]: string }
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export default function Table({ header = [], data = [], onClick }: TableProps) {
+export default function Table({ header = [], data = [], onClick, dataMapping }: TableProps) {
+
   return (
     <div className="w-full border border-[#E0E0E0] rounded-[10px] overflow-hidden p-[20px]">
       <div className="flex justify-end mb-4">
@@ -44,7 +46,7 @@ export default function Table({ header = [], data = [], onClick }: TableProps) {
               >
                 {header.map((key, colIndex) => (
                   <td key={colIndex} className="text-left px-4 py-2">
-                    {String(row[key]) || "--"}
+                    {String(row[dataMapping[key]] ?? "--")}
                   </td>
                 ))}
                 <td className="text-left px-4 py-2 flex gap-4">
