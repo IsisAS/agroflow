@@ -7,9 +7,10 @@ type TableProps = {
   data?: { [key: string]: unknown }[];
   dataMapping: { [key: string]: string }
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  editAction?: (id: unknown) => void;
 };
 
-export default function Table({ header = [], data = [], onClick, dataMapping }: TableProps) {
+export default function Table({ header = [], data = [], onClick, dataMapping, editAction }: TableProps) {
 
   return (
     <div className="w-full border border-[#E0E0E0] rounded-[10px] overflow-hidden p-[20px]">
@@ -53,7 +54,9 @@ export default function Table({ header = [], data = [], onClick, dataMapping }: 
                   <button title="Excluir">
                     <Icon params={{ slug: "trash", width: 20, height: 20 }} />
                   </button>
-                  <button title="Editar">
+                  <button title="Editar"   onClick={() =>
+                      editAction && editAction(row.id)
+                    }>
                     <Icon params={{ slug: "edit", width: 20, height: 20 }} />
                   </button>
                 </td>

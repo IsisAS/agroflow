@@ -16,7 +16,13 @@ export default function Animals() {
             <Breadcrumb items={breadcrumb} />
             {loading ?
                 <Spinner color="default" /> :
-                <Table header={header} data={animals} dataMapping={dataMapping} onClick={() => router.push('/dashboard/animals/register')} />
+                <Table
+                    header={header}
+                    data={animals}
+                    dataMapping={dataMapping}
+                    onClick={() => router.push('/dashboard/animals/register/undefined')}
+                    editAction={(id) => router.push(`/dashboard/animals/register/${id}`)}
+                />
             }
         </div>
     )

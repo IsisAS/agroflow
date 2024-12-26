@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 export default function useRegister() {
+  const { id } = useParams<{ id: string }>() || { id: "" };
+  const router = useRouter();
+
   const breadcrumb = [
     { route: "/dashboard", name: "Dashboard" },
     { route: "/dashboard/animals", name: "Animais" },
     { route: "/dashboard/animals/register", name: "Cadastro" },
   ];
-  const router = useRouter();
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,6 +40,22 @@ export default function useRegister() {
     register(name);
   };
 
+  useEffect(() => {
+    if (id !== "undefined") {
+      setIsLoading(true);
+      fetch(`/api/animals/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("DATA", data);
+          setFormData(data.data);
+        })
+        .catch((err) => console.error("Erro ao buscar dados do animal:", err))
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [id]);
+
   type FormData = {
     identification: string;
     species: string;
@@ -49,8 +67,20 @@ export default function useRegister() {
   };
 
   const onSubmit: SubmitHandler<FormData> = async () => {
-    try {
-      setIsLoading(true);
+    setIsLoading(true);
+
+    if (id !== "undefined") {
+      fetch(`/api/animals/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+        .then(() => router.push("/dashboard/animals"))
+        .catch((err) => {
+          console.error("Erro ao atualizar o animal:", err);
+          toast.error("Erro ao atualizar o animal");
+        });
+    } else {
       const response = await fetch("/api/animals", {
         method: "POST",
         headers: {
@@ -59,7 +89,6 @@ export default function useRegister() {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-
       if (response.ok) {
         toast.success("Animal cadastrado com sucesso!");
         router.push("/dashboard/animals");
@@ -67,11 +96,6 @@ export default function useRegister() {
         console.error("Erro:", data.message);
         toast.error(`Erro: ${data.message}`);
       }
-    } catch (error) {
-      console.error("Erro ao enviar dados:", error);
-      toast.error("Erro ao enviar dados.");
-    } finally {
-      setIsLoading(false);
     }
   };
 

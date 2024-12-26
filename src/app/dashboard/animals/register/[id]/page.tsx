@@ -5,18 +5,14 @@ import useRegister from "./useRegister";
 import Breadcrumb from "@/components/breadcrumb";
 import Button from "@/components/button";
 
-type RegisterProps = {
-    params: { id: string }
-}
-export default function Register({ params }: RegisterProps) {
+export default function Register() {
     const { handleInputChange, formData, breadcrumb, species, isLoading, onSubmit, handleSubmit } = useRegister();
-    console.log("params", params.id);
 
     return (
         <form className="flex flex-col gap-[20px] w-full">
             <Breadcrumb items={breadcrumb} />
             <p className="text-[20px] text-black font-semibold">Cadastro de Animais</p>
-            
+
             <div className="flex flex-col lg:flex-row gap-[10px]">
                 <div className="border rounded-[20px] m-h-[300px] w-[100%] lg:w-[60%] p-[20px] flex flex-col gap-[20px]">
                     <p className="text-gray-700">INFORMAÇÕES DO ANIMAL</p>
