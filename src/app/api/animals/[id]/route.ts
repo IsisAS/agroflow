@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = parseInt(params.id, 10);
+  const id = parseInt((await params).id, 10);
   try {
     const animal = await prisma.animal.findUnique({
       where: {
@@ -34,9 +34,9 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = parseInt(params.id, 10);
+  const id = parseInt((await params).id, 10);
   try {
     const body = await req.json();
     const updatedAnimal = await prisma.animal.update({
@@ -59,9 +59,9 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = parseInt(params.id, 10);
+  const id = parseInt((await params).id, 10);
   try {
     await prisma.animal.delete({
       where: { id },
