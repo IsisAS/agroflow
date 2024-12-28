@@ -4,26 +4,28 @@ import Icon from "@/assets/[slug]/icon";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { signOut } from "next-auth/react";
 
 export default function Layout({ children }: { children: ReactNode }) {
-    const { data: session, status } = useSession();
+    const { status } = useSession();
     const router = useRouter();
     const [selectedMenu, setSelectedMenu] = useState("Dashboard");
 
     const menu: { name: string, link: string, icon: keyof typeof iconsList, darkIcon: keyof typeof iconsList }[] = [
         { name: 'Dashboard', link: '/dashboard', icon: 'layout', darkIcon: 'layoutCinza' },
         { name: 'Animais', link: '/dashboard/animals  ', icon: 'gado', darkIcon: 'gadoCinza' },
-        { name: 'Estoque', link: '/dashboard/users', icon: 'celeiro', darkIcon: 'celeiroCinza' },
+        // { name: 'Estoque', link: '/', icon: 'celeiro', darkIcon: 'celeiroCinza' },
     ]
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/auth");
+        }
+    }, [status, router]);
 
     if (status === 'loading') {
         return <div>Carregando...</div>
-    }
-
-    if (!session) {
-        router.push('/auth');
-        return null;
     }
 
     const navigateMenu = (menu: { name: string, link: string, icon: keyof typeof iconsList }) => {
@@ -31,12 +33,16 @@ export default function Layout({ children }: { children: ReactNode }) {
         setSelectedMenu(menu.name);
     }
 
+    const logout = () => {
+        signOut({ callbackUrl: '/auth' });
+    }
+
     return (
         <div className="flex">
             <aside className="w-[250px] text-white h-screen border-r-2 border-solid flex flex-col items-center pt-[30px] gap-[40px]">
                 <Image src="/logo-escura.png" alt="logo" width={150} height={150} style={{ width: "auto", height: "auto" }} />
 
-                <div>
+                <div className="flex-1 flex flex-col">
                     {menu.map((item, index) => (
                         <div key={index} className="w-full h-[50px]">
                             <div
@@ -47,6 +53,10 @@ export default function Layout({ children }: { children: ReactNode }) {
                             </div>
                         </div>
                     ))}
+                    <div onClick={() => logout()} className="flex items-end justify-start gap-[10px] rounded-[10px] h-[35px] w-[150px] pl-[20px] cursor-pointer mt-auto flex-1 pb-[80px]">
+                        <Icon params={{ slug: 'sair', width: 22, height: 22 }} />
+                        <p className="text-[--text-color]">Sair</p>
+                    </div>
                 </div>
             </aside>
             <div className="flex-1">

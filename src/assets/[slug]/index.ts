@@ -9,6 +9,7 @@ import layoutCinzaIcon from "./layout-cinza.png";
 import trashIcon from "./trash.png";
 import plusIcon from "./plus.png";
 import editIcon from "./edit.png";
+import exitIcon from "./sair.png";
 
 export const iconsList = {
   show: showIcon,
@@ -22,4 +23,5 @@ export const iconsList = {
   trash: trashIcon,
   plus: plusIcon,
   edit: editIcon,
+  sair: exitIcon,
 };
