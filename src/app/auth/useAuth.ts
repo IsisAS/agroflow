@@ -15,12 +15,13 @@ export function useAuth() {
       redirect: false,
       email,
       password,
+    }).finally(() => {
+      setLoading(false);
     });
 
     if (result?.error) {
       alert("Erro: " + result.error);
     } else {
-      setLoading(false);
       router.push("/dashboard");
     }
   };

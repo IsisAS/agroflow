@@ -55,8 +55,13 @@ git clone https://github.com/IsisAS/agroflow
 ```bash
 npm install
 ```
+3. Configure o banco de dados com o Prisma:
+```bash
+npx prisma db push
+npx prisma generate
+```
 
-3. Inicie o servidor de desenvolvimento:
+4. Inicie o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
